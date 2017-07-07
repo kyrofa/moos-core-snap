@@ -1,0 +1,49 @@
+name: moos-core
+version: '10.0.2.a'
+summary: Core MOOS components
+description: |
+  A very light weight, easy to use middleware. You will need core-moos above
+  all other components
+
+grade: stable
+confinement: strict
+
+apps:
+  MOOSDB:
+    command: MOOSDB
+    plugs:
+      - network
+      - network-bind
+
+  ktm:
+    command: ktm
+    plugs:
+      - network
+      - network-bind
+
+  mtm:
+    command: mtm
+    plugs:
+      - network
+      - network-bind
+
+  mqos:
+    command: mqos
+    plugs:
+      - network
+      - network-bind
+
+  umm:
+    command: umm
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  core-moos:
+    plugin: cmake
+    source: https://github.com/themoos/core-moos/archive/10.0.2.a-release.tar.gz
+    configflags:
+      - -DENABLE_EXPORT=OFF
+      - -DCMAKE_INSTALL_PREFIX=/
+    build-packages: [gcc, g++]
